@@ -34,8 +34,8 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 queue()
-    .defer(d3.json, "us.json")
-    .defer(d3.json, "us-state-centroids.json")
+    .defer(d3.json, "data/us.json")
+    .defer(d3.json, "data/us-state-centroids.json")
     .await(ready);
 
 function ready(error, us, centroid) {
