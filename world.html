@@ -57,8 +57,8 @@ var svg = d3.select("div").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var url = "countries.json";//"http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
-var url2 = "word-country-centroids.json";//"http://enjalot.github.io/wwsd/data/world/ne_50m_populated_places_simple.geojson"
+var url = "data/countries.json";//"http://enjalot.github.io/wwsd/data/world/world-110m.geojson";
+var url2 = "data/word-country-centroids.json";//"http://enjalot.github.io/wwsd/data/world/ne_50m_populated_places_simple.geojson"
 d3.json(url, function(error, countries) {
 d3.json(url2, function(error, places) {
   if (error) console.log(error);
