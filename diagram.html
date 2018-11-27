@@ -42,6 +42,31 @@ rect:hover {  fill:blue; }
 <!--<script src="http://d3js.org/d3.v3.min.js"></script>!-->
 <script src="js/d3/4.13.0/d3.min.js"></script>
 <script>
+var svg = d3.select("div").append("svg").attr("width", 0).attr("height", 0);
+var defs = svg.append("defs");
+var imgPattern = defs.selectAll("pattern").data([1,2,3])
+                 .enter()
+                 .append("pattern")
+                 .attr("id", function(d){if(d==1) return "img1";
+								if(d==2) return "img2";
+								if(d==3) return "img3";
+								})
+                .attr("width", "100%")
+                .attr("height", "100%")
+                .attr("patternUnits", "objectBoundingBox")
+                .attr("patternContentUnits", "objectBoundingBox")
+                .append("image")
+                //.attr("x", 0)
+                //.attr("y", 0)
+                .attr("width", 1)
+                .attr("height", 1)
+                .attr("preserveAspectRatio", "none")
+                .attr("xlink:href", function(d){if(d==1) return "http://lar/SmartMap/img/flags/RU.svg";
+											    if(d==2) return "http://lar/SmartMap/img/flags/US.svg";
+										        if(d==3) return "http://lar/SmartMap/img/flags/AU.svg";
+										        })
+
+
 function dashboard(id, fData){
     var barColor = 'steelblue';
     function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
@@ -79,7 +104,11 @@ function dashboard(id, fData){
             .attr("y", function(d) { return y(d[1]); })
             .attr("width", x.bandwidth())
             .attr("height", function(d) { return hGDim.h - y(d[1]); })
-            .attr('fill',barColor)
+            
+			//.attr('fill',barColor)
+			.style("fill", function(d){return "url(#img1)";})
+			.style("stroke-width", "1px")
+			.style("stroke","#111")
             .on("mouseover",mouseover)// mouseover is defined below.
             .on("mouseout",mouseout);// mouseout is defined below.
             
@@ -247,6 +276,7 @@ var freqData=[
 ,{State:'IL',freq:{low:4498, mid:3852, high:942}}
 ,{State:'IN',freq:{low:797, mid:1849, high:1534}}
 ,{State:'KS',freq:{low:162, mid:379, high:471}}
+,{State:'HZ',freq:{low:1232, mid:893, high:1231}}
 ];
 
 dashboard('#dashboard',freqData);
